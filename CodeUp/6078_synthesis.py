@@ -1,7 +1,9 @@
 a = input()
 
-while(a!='q'):
-    if()
-    print(a)
-    a = input()
-    
+while():
+    if(a=='q'):
+        print(a)
+        break
+    else:
+        print(a)
+        a = input() 
