@@ -8,21 +8,26 @@ for i in range(10):
 for i in range(10):
     a[i] = list(map(int, input().split()))
 
-x, y = int(1)
+y = 0
+break2 = True
 
-break2 = False
 for i in range(1,10):
     for j in range(1,10):
-        if (a[x][y]==0):
-            a[x][y] = 9
         
-        elif (a[x][y]==2):
-            a[x][y] = 9
+        j = y+1
+
+
+        if (a[i][j]==0):
+            a[i][j] = 9
+        
+        elif (a[i][j]==1):
+            y = j
+            break
 
 
         else:
             a[i][j] = 9
-            break2 = True
+            break2 = False
             break
     
     if(break2==False):
