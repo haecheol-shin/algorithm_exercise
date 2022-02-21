@@ -1,39 +1,26 @@
-a = []
+array = [] 
 
-for i in range(10):
-    a.append([])
-    for j in range(10):
-        a[i].append(0)
+for i in range(10): 
+    array.append(list(map(int, input().split())))
 
-for i in range(10):
-    a[i] = list(map(int, input().split()))
+x, y = 1, 1 
 
-y = 0
-break2 = True
-
-for i in range(1,10):
-    for j in range(1,10):
+while True: 
+    if (array[x][y] == 0): 
+        array[x][y] = 9 
         
-        j = y+1
-
-
-        if (a[i][j]==0):
-            a[i][j] = 9
-        
-        elif (a[i][j]==1):
-            y = j
-            break
-
-
-        else:
-            a[i][j] = 9
-            break2 = False
-            break
+    elif (array[x][y] == 2): 
+        array[x][y] = 9 
+        break 
     
-    if(break2==False):
-        break
+    if ((array[x][y+1] == 1 and array[x+1][y] == 1)): 
+        break 
     
-for i in range(10):
-    for j in range(10):
-        print(a[i][j], end=" ")
+    if (array[x][y+1] != 1): y = y + 1 
+    
+    elif (array[x+1][y] != 1): x = x + 1 
+    
+for i in range(10): 
+    for j in range(10): 
+        print(array[i][j], end=' ')
     print()
