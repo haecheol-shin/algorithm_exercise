@@ -1,5 +1,3 @@
-# 정답은 맞으나 시간초과 문제발생 -> 아무래도 이중 for문을 쓰면 안되는듯
-
 n = int(input()) # 도시 개수
 distance = list(map(int, input().split())) # 도시 사이 거리
 price = list(map(int, input().split())) # 리터 당 가격
