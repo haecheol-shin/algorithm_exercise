@@ -1,52 +1,30 @@
 import sys
 
-n = int(sys.stdin.readline())
+n = int(sys.stdin.readline()) # 수열의 길이를 입력받음
 inputSequence = [] # 수열을 입력받을 리스트 
 result = [] # 결과 값을 저장하는 리스트
+stack = [] # 스택
 
 for i in range(n):
-    inputSequence.append(int(sys.stdin.readline()))
+    inputSequence.append(int(sys.stdin.readline())) # 수열을 입력받음
 
-pushCount = 0 # 수열이 반복문을 돌아가면서 가장 높은 수를 저장
-plusCount = 0 # +를 몇번 찍어야하는지 저장하는 변수
-
+top = 0 # 아래 반복문을 반복하면서 나온 수 중 가장 큰 수
 for i in range(n):
-    if (i==0 or inputSequence[i-1]-inputSequence[i]<=1):
-        pass
+    if (inputSequence[i]>top): # 현재 수가 top보가 클 때
+        for j in range(top+1,inputSequence[i]+1): # top+1부터 현재 수 까지 스택에 수를 집어넣음
+            stack.append(j)
+            result.append('+') # 반복문이 돌아간만큼 +를 넣어줌
+        top = inputSequence[i] # top를 바꿔줌
     
-    else:
-        print("NO")
+    if (inputSequence[i]!=stack.pop()): # 만약 pop을 했는데 현재 수와 다른 경우
+        print("NO") # 불가능한 수열
         break
-    
-    if (inputSequence[i]>pushCount):
-        pushCount = inputSequence[i] # 가장 높은 수를 저장
-        plusCount = pushCount - plusCount # 가장 높은 수 - 이미 저장된 +개수
-        for j in range(plusCount):
-            result.append('+')
-    
-    result.append('-')
+    result.append('-') # 반복문 가장 마지막에 -를 넣어줌
 
-    if (i==n-1):
-        for j in range(len(result)):
-            print(result[j])
+    if (i==n-1): # 반복문이 다 돌아갔다면
+        for j in result: # 결과출력
+            print(j)
 
-    else:
-        pass
 
-#######################################
-import sys
 
-n = int(sys.stdin.readline())
-inputSequence = [] # 수열을 입력받을 리스트
-arr = [i for i in range(1,n+1)]
-emptyArr = [0 for ]
-result = [] # 결과 값을 저장하는 리스트
 
-for i in range(n):
-    inputSequence.append(int(sys.stdin.readline()))
-
-for i in range(n):
-
-    
-for i in range(len(result)):
-    print(result[i])
