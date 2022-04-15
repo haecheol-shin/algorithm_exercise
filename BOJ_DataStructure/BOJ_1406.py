@@ -3,32 +3,42 @@
 # B: 커서 왼쪽에 있는 문자를 삭제
 # P ?: ?라는 문자를 커서 왼쪽에 추가함
 
+# deque 를 사용해서 해결해야함
+
 import sys
 
-sentence = sys.stdin.readline() # 초기 문자열
-sentence = '.'+'.'.join(sentence)
+sentence = list(sys.stdin.readline()) # 초기 문자열
+sentence.pop() # 널문자 제거
 n = int(sys.stdin.readline()) # 명령 횟수
-userCommand = []
-pointer = -1
+pointer = len(sentence)
 
 for i in range(n):
-    userCommand.append(sys.stdin.readline().split())
+    userCommand = list(sys.stdin.readline().split())
     
     if (userCommand[0]=='P'):
-        push(userCommand[1])
+        sentence.insert(pointer, userCommand[1])
+        pointer += 1
+    
     elif (userCommand[0]=='L'):
-        left()
+        if (pointer==0):
+            pass
+        else:
+            pointer -= 1
+    
     elif (userCommand[0]=='D'):
-        right()
+        if (pointer==len(sentence)):
+            pass
+        else:
+            pointer += 1
+    
     elif (userCommand[0]=='B'):
-        delete()
+        if (pointer==0):
+            pass
+        else:
+            del sentence[pointer-1]
+            pointer -= 1
+        
     else:
         break
-        
-def push(letter):
 
-def left():
-
-def right():
-
-def delete():
+print(''.join(i for i in sentence))
