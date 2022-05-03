@@ -7,9 +7,22 @@ from collections import deque
 
 sentence = sys.stdin.readline()
 
-result = ''
-stack = []
-queue = deque([])
+result = '' # 결과를 저장
+queue = deque([]) # 단어를 저장할 데크
 
 for i in sentence:
-    print(i)
+    if (i=='<'):
+        # > 가 나오기 전까지 계속 데크에 저장
+    
+    elif (i=='>'):
+        queue.append(i)
+        for i in range(len(queue)):
+            result.join(queue.popleft()) # 앞에서 부터 출력
+
+    elif (i==' '):
+        for i in range(len(queue)):
+            result.join(queue.pop()) # 뒤에서 부터 출력
+    else:
+        queue.append(i)    
+
+# <>안에 있는 공백 처리 문제

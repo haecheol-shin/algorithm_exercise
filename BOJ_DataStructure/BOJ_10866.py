@@ -22,15 +22,15 @@ for i in range(n):
     
     elif (userCommand[0]=="pop_front"):
         if (len(deque)!=0):
-            print(deque.pop(0)) # 배열의 길이 - 1 을 하면 맨 뒤
+            print(deque.pop(0))
         else:
-            print(-1) # 큐에 아무것도 없을 때
+            print(-1) 
     
     elif (userCommand[0]=="pop_back"):
         if (len(deque)!=0):
             print(deque.pop())
         else:
-            print(-1) # 큐에 아무것도 없을 때
+            print(-1) 
     
     elif (userCommand[0]=="empty"):
         if (len(deque)!=0):
