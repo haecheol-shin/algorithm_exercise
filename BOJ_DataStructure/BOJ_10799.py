@@ -9,20 +9,30 @@ sentence = sys.stdin.readline()
 
 result = '' # 결과를 저장
 queue = deque([]) # 단어를 저장할 데크
+temp = [] # 단어를 임시로 저장함
+signal = False
 
 for i in sentence:
-    if (i=='<'):
-        # > 가 나오기 전까지 계속 데크에 저장
-    
-    elif (i=='>'):
-        queue.append(i)
-        for i in range(len(queue)):
-            result.join(queue.popleft()) # 앞에서 부터 출력
+    if (signal == True):
 
-    elif (i==' '):
-        for i in range(len(queue)):
-            result.join(queue.pop()) # 뒤에서 부터 출력
+        if (i=='>'):
+            queue.append(i)
+            for i in range(len(queue)):
+                result.join(queue.popleft())
+            result.join(' ')
+            signal = False
+
+        else:
+            queue.append(i)
     else:
-        queue.append(i)    
+        if (i=='<'):
+            queue.append(i)
+            signal = True
 
-# <>안에 있는 공백 처리 문제
+        elif (i==' '):
+            result.join(queue.pop())
+            result.join(' ')
+        else:
+            queue.append(i)    
+
+print(result)
