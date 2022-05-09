@@ -1,4 +1,3 @@
-from msilib import sequence
 import sys
 
 n = int(sys.stdin.readline()) # 수열의 크기
