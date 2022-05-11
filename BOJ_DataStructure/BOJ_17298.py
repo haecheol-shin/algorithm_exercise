@@ -16,4 +16,5 @@ for i in range(n):
 
 result.append(-1)
 
-print(result)
+for i in result:
+    print(i, end=' ')
