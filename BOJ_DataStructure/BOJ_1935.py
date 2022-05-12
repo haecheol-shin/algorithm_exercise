@@ -2,24 +2,58 @@ import sys
 
 n = int(sys.stdin.readline()) # 피연산자 개수
 stack = [] # 피연산자를 저장할 스택
-sentence = sys.stdin.readline() # 후위 표기식
+alphaSentence = sys.stdin.readline() # 후위 표기식
 num = [] # 피연산자의 숫자를 저장하는 배열
+digitSentence = []
 
 for i in range(n):
-    num.append(sys.stdin.readline())
-    if sentence[i]=='+' or sentence[i]=='-' or sentence[i]=='*' or sentence[i]=='/':
-        pass
+    num.append(int(sys.stdin.readline()))
 
-    else:    
-        sentence.replace(num[i], sentence[i])
+count = 0
+for i in range(len(alphaSentence)): # 후위 표기식의 문자를 숫자로 바꿈
+    if alphaSentence[i].isalpha() == True:
+        digitSentence.append(num[count])
+        count += 1
 
-print(sentence)
-print(sentence[0])
+    else:
+        digitSentence.append(alphaSentence[i])
 
+i = 0
+while(len(digitSentence)!=1):
+    stack.append(digitSentence[i])
 
-# for i in range(n):
-#     stack[i] = sentence[i]
+    if(i>=2): # 여기틀림
+        if(str(stack[i-2]).isdigit()==True and str(stack[i-1]).isdigit()==True and str(stack[i]).isdigit()==False):
+            if (stack[i]=='+'):
+                stack[i-2] = stack[i-2] + stack[i-1]
+                stack.pop()
+                stack.pop()
+                i -= 2
 
-#     if (i>=2):
-#         if(type(sentence[i-2])==int and type(sentence[i-1])==int and type(sentence[i-2])==str):
-#             sentence[i-2]
+            elif (stack[i]=='-'):
+                stack[i-2] = stack[i-2] - stack[i-1]
+                stack.pop()
+                stack.pop()
+                i -= 2
+
+            elif (stack[i]=='*'):
+                stack[i-2] = stack[i-2] * stack[i-1]
+                stack.pop()
+                stack.pop()
+                i -= 2
+                
+            elif (stack[i]=='/'):
+                stack[i-2] = stack[i-2] / stack[i-1]
+                stack.pop()
+                stack.pop()
+                i -= 2
+
+            else:
+                break
+        
+        else:
+            pass
+            # 무한루프 문제 해결 못함
+    i += 1
+
+print(stack)
