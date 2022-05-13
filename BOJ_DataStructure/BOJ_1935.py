@@ -18,11 +18,13 @@ for i in range(len(alphaSentence)): # 후위 표기식의 문자를 숫자로 �
     else:
         digitSentence.append(alphaSentence[i])
 
+digitSentence.pop() # 맨 뒤 널 문자를 pop
+
 i = 0
-while(len(digitSentence)!=1):
+while():
     stack.append(digitSentence[i])
 
-    if(i>=2): # 여기틀림
+    if(i>=2): 
         if(str(stack[i-2]).isdigit()==True and str(stack[i-1]).isdigit()==True and str(stack[i]).isdigit()==False):
             if (stack[i]=='+'):
                 stack[i-2] = stack[i-2] + stack[i-1]
@@ -53,7 +55,11 @@ while(len(digitSentence)!=1):
         
         else:
             pass
-            # 무한루프 문제 해결 못함
+    else:
+        pass
+
     i += 1
+
+    # 무한루프를 빠져나올 조건문 필요
 
 print(stack)
