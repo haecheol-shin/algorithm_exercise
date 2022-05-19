@@ -1,19 +1,49 @@
-# 사용자에게 문장을 한꺼번에 받는지 or 한문장씩 받는지
+import sys
 
-upperCaseLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-upperDic = {}
+def letterCount(sentence):
+    upperCount = 0
+    lowerCount = 0
+    numCount = 0
+    spaceCount = 0
 
-lowerCaseLetter = "abcdefghijklmnopqrstuvwxyz"
-lowerDic = {}
+    for letter in sentence:
+        if letter.islower():
+            lowerCount += 1
+        
+        elif letter.isupper():
+            upperCount += 1
+        
+        elif letter.isdigit():
+            numCount += 1
+        
+        elif letter.isspace():
+            spaceCount += 1
+        
+        else:
+            return -1
+    
+    result = str(lowerCount)+' '+str(upperCount)+' '+str(numCount)+' '+str(spaceCount)
+    return result
 
-numberLetter = '0123456789'
-numDic = {}
+if __name__=="__main__":
+        while True: #  EOF 종료조건 기억
+            try:
+                sentence = input()
+                func = letterCount(sentence)
+                if func == -1:
+                    break
+                    
+                else:
+                    print(func)
 
-space = 0 # 공백
-num = 0 # 숫자
-upper = 0 # 대문자
-lower = 0 # 소문자
+            except EOFError:
+                break
+        # n = int(input())
+            
+        # sentenceList = []
 
-sentence = input().split('\n')
-print(sentence)
-# for letter in sentence:
+        # for i in range(n):
+        #     sentenceList.append(sys.stdin.readline())
+        
+        # for i in sentenceList:
+        #     letterCount(i)
