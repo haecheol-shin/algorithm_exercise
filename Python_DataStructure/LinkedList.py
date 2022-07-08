@@ -1,35 +1,87 @@
 class Node:
+
     def __init__(self, item):
         self.data = item
         self.next = None
 
+
 class LinkedList:
+
     def __init__(self):
         self.nodeCount = 0
         self.head = None
         self.tail = None
 
-    def getAt(self, pos): # 특정 노드를 참조하는 메소드
+
+    def getAt(self, pos):
         if pos < 1 or pos > self.nodeCount:
             return None
-        i = 1
-        curr = self.head # 처음에 head를 넣어줌
-        while i < pos:
-            curr = curr.next # 다음 노드를 가리킴
-            i += 1
-        return curr
 
-    def traverse(self): # getAt 메소드를 사용하면 처음 방문했던 노드도 계속해서 방문하기 때문에 사용하면 안된다.
-        answer = []
         i = 1
         curr = self.head
-        while i <= self.nodeCount:
-            answer.append(curr.data)
+        while i < pos:
             curr = curr.next
             i += 1
-        return answer
+
+        return curr
 
 
-# 이 solution 함수는 그대로 두어야 합니다.
+    def insertAt(self, pos, newNode):
+        if pos < 1 or pos > self.nodeCount + 1:
+            return False
+
+        if pos == 1:
+            newNode.next = self.head
+            self.head = newNode
+
+        else:
+            if pos == self.nodeCount + 1:
+                prev = self.tail
+            else:
+                prev = self.getAt(pos - 1)
+            newNode.next = prev.next
+            prev.next = newNode
+
+        if pos == self.nodeCount + 1:
+            self.tail = newNode
+
+        self.nodeCount += 1
+        return True
+
+
+    def popAt(self, pos): # 리스트 안에 유일한 노드를 삭제하려 할때를 해결해야 할 듯
+        if pos < 1 or pos > self.nodeCount:
+            raise IndexError("IndexError")
+            
+        if pos == 1:
+            curr = self.head
+            self.head = self.head.next
+            self.head.next = None
+        
+        elif pos == self.nodeCount:
+            prev = self.getAt(pos-1)
+            curr = prev.next
+            self.tail = prev
+            prev.next = None
+            
+        else:
+            prev = self.getAt(pos-1)
+            curr = prev.next
+            prev.next = curr.next
+            curr.next = None
+        
+        self.nodeCount -= 1
+        return curr
+
+
+    def traverse(self):
+        result = []
+        curr = self.head
+        while curr is not None:
+            result.append(curr.data)
+            curr = curr.next
+        return result
+
+
 def solution(x):
     return 0
