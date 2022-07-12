@@ -58,8 +58,8 @@ class LinkedList:
 
     def popAfter(self, prev):
         curr = prev.next
-        if curr.next is None:
-            prev = self.tail
+        if curr.next == None:
+            self.tail = prev
         prev.next = curr.next
         return curr.data
 
@@ -68,10 +68,9 @@ class LinkedList:
         if pos < 1 or pos > self.nodeCount:
             raise IndexError("Index Error")
 
-        if pos == 1:
+        prev = self.getAt(pos - 1)
+        if prev.next == None:
             return None
-        else:
-            prev = self.getAt(pos - 1)
         return self.popAfter(prev)
 
 
