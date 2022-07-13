@@ -58,19 +58,27 @@ class LinkedList:
 
     def popAfter(self, prev):
         curr = prev.next
-        if curr.next == None:
+        if curr.next == None: # 마지막 노드를 삭제할 때 tail 조정 필요
             self.tail = prev
         prev.next = curr.next
+        self.nodeCount -= 1
         return curr.data
 
 
     def popAt(self, pos):
         if pos < 1 or pos > self.nodeCount:
             raise IndexError("Index Error")
-
-        prev = self.getAt(pos - 1)
-        if prev.next == None:
+        
+        if self.nodeCount == 1: # 유일한 노드를 삭제할 때 tail 조정 필요
+            prev = self.head
+            self.head.next = self.tail
+        
+        elif self.nodeCount == 0: # 빈 리스트 일때는 None을 반환
             return None
+        
+        else:
+            prev = self.getAt(pos - 1)
+        
         return self.popAfter(prev)
 
 
