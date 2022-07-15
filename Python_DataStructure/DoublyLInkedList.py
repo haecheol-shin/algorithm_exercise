@@ -17,25 +17,6 @@ class DoublyLinkedList:
         self.tail.prev = self.head
         self.tail.next = None
 
-
-    def concat(self, L):
-        if self.nodeCount == 0 and L.nodeCount != 0:
-            return L
-        
-        elif self.nodeCount != 0 and L.nodeCount == 0:
-            return self
-        
-        elif self.nodeCount == 0 and L.nodeCount == 0:
-            return None
-    
-        else:
-            self.tail.prev.next = L.head.next
-            L.head.next.prev = self.tail.prev
-            self.tail = L.tail
-            self.nodeCount += L.nodeCount
-            return self
-
-
     def traverse(self):
         result = []
         curr = self.head
@@ -44,6 +25,13 @@ class DoublyLinkedList:
             result.append(curr.data)
         return result
 
+    def reverse(self):
+        result = []
+        curr = self.tail
+        while curr.prev.prev:
+            curr = curr.prev
+            result.append(curr.data)
+        return result
     
     def getAt(self, pos):
         if pos < 0 or pos > self.nodeCount:
@@ -64,7 +52,6 @@ class DoublyLinkedList:
 
         return curr
 
-
     def insertAfter(self, prev, newNode):
         next = prev.next
         newNode.prev = prev
@@ -74,6 +61,14 @@ class DoublyLinkedList:
         self.nodeCount += 1
         return True
 
+    def insertBefore(self, next, newNode):
+        newNode.next = next
+        newNode.prev = next.prev
+        next.prev = newNode
+        newNode.prev.next = newNode
+        
+        self.nodeCount += 1
+        return True
 
     def insertAt(self, pos, newNode):
         if pos < 1 or pos > self.nodeCount + 1:
@@ -82,6 +77,42 @@ class DoublyLinkedList:
         prev = self.getAt(pos - 1)
         return self.insertAfter(prev, newNode)
 
+    def popAfter(self, prev):
+        curr = prev.next
+        curr.next.prev = prev
+        prev.next = curr.next
+        self.nodeCount -= 1
+        return curr.data
 
-def solution(x):
-    return 0
+    def popBefore(self, next):
+        curr = next.prev
+        curr.prev.next = next
+        next.prev = curr.prev
+        self.nodeCount -= 1
+        return curr.dat
+
+    def popAt(self, pos):
+        if pos < 1 or pos > self.nodeCount:
+            raise IndexError("IndexError")
+            
+        prev = self.getAt(pos - 1)
+        return self.popAfter(prev)
+    
+
+    def concat(self, L):
+        if self.nodeCount == 0 and L.nodeCount != 0:
+            self.head = L.head
+            self.tail = L.tail
+            self.nodeCount += L.nodeCount
+        
+        elif self.nodeCount != 0 and L.nodeCount == 0:
+            pass
+        
+        elif self.nodeCount == 0 and L.nodeCount == 0:
+            pass
+    
+        else:
+            self.tail.prev.next = L.head.next
+            L.head.next.prev = self.tail.prev
+            self.tail = L.tail
+            self.nodeCount += L.nodeCount
