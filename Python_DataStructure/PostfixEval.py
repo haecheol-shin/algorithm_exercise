@@ -1,7 +1,3 @@
-from inspect import stack
-from turtle import pos
-
-
 class ArrayStack:
 
     def __init__(self):
@@ -58,7 +54,7 @@ def infixToPostfix(tokenList):
     postfixList = []
 
     for token in tokenList:
-        if not token in '+-*/':
+        if type(token) is int:
             postfixList.append(token)
 
         elif opStack.isEmpty() or token == '(':
@@ -76,13 +72,16 @@ def infixToPostfix(tokenList):
                 if opStack.isEmpty() or opStack.peek() == '(':
                     break
             opStack.push(token)
+
+    while not opStack.isEmpty():
+        postfixList.append(opStack.pop())
     return postfixList
 
 
 def postfixEval(tokenList):
     val = ArrayStack()
     for token in tokenList:
-        if not token in '+-*/':
+        if type(token) is int:
             val.push(token)
         
         else:
@@ -109,3 +108,7 @@ def solution(expr):
     postfix = infixToPostfix(tokens)
     val = postfixEval(postfix)
     return val
+
+if __name__=="__main__":
+    a = "5 + 3"
+    print(solution(a))
