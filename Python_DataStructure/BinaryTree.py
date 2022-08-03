@@ -40,10 +40,22 @@ class Node:
         return traversal
 
 
+    def postorder(self):
+        traversal = []
+        if self.left:
+            traversal += self.left.postorder()
+        if self.right:
+            traversal += self.right.postorder()
+        traversal.append(self.data)
+        return traversal
+
+
 class BinaryTree:
+
 
     def __init__(self, r):
         self.root = r
+
 
     def size(self):
         if self.root:
@@ -58,6 +70,7 @@ class BinaryTree:
         else:
             return 0
 
+
     def inorder(self):
         if self.root:
             return self.root.inorder()
@@ -68,5 +81,11 @@ class BinaryTree:
     def preorder(self):
         if self.root:
             return self.root.preorder()
+        else:
+            return []
+
+    def postorder(self):
+        if self.root:
+            return self.root.postorder()
         else:
             return []
