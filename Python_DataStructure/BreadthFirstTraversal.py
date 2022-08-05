@@ -40,14 +40,13 @@ class BinaryTree:
         if self.root:
             queue.enqueue(self.root)
 
-        while(queue.isEmpty is not True):
-            node = Node()
-            node = queue.dequeue()
-            traversal.append(node.data)
-            if node.left:
-                queue.enqueue(node.left.data)
-            if node.right:
-                queue.enqueue(node.right.data)
+            while queue.isEmpty() is not True:
+                node = queue.dequeue()
+                traversal.append(node.data)
+                if node.left:
+                    queue.enqueue(node.left)
+                if node.right:
+                    queue.enqueue(node.right)
 
         return traversal
 
