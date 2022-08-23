@@ -6,18 +6,15 @@ class MaxHeap:
 
     def insert(self, item):
         self.data.append(item)
-        if self.data == [None]:
-            pass
+        index = len(self.data)-1
+        parent = index // 2
+        
+        while(parent != 0 and self.data[index]>self.data[parent]):
+            self.data[index], self.data[parent] = self.data[parent], self.data[index]
+            index = parent
+            parent = index // 2
             
-        else:
-            parentIndex = self.data.index(item)//2
-            itemIndex = self.data.index(item)
-
-            while(self.data[parentIndex]<self.data[itemIndex]):
-                parentIndex, itemIndex = itemIndex, parentIndex
-                parentIndex = parentIndex // 2
-                
-            
+        
         
 def solution(x):
     return 0
