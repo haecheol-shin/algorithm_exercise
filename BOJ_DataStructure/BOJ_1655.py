@@ -12,16 +12,7 @@ for i in range(n):
     if len(minHeap)==0 and len(maxHeap)==0:
         middle = num
 
-    if len(minHeap) !=0 and len(minHeap) == len(maxHeap):
-        middle = (minHeap[0] + maxHeap[0][1]) / 2
-
-    if len(minHeap) - len(maxHeap) == 1:
-        middle = minHeap[0]
-
-    if len(minHeap) - len(maxHeap) == -1:
-        middle = maxHeap[0][1]
-
-    if middle >= num:
+    if middle < num:
         heapq.heappush(minHeap, num)
 
     else:
@@ -35,7 +26,19 @@ for i in range(n):
         x = heapq.heappop(maxHeap)[1]
         heapq.heappush(minHeap, x)
     
+    if len(minHeap)==0:
+        middle = maxHeap[0][1]
+
+    else:
+        middle = minHeap[0]
+
     if len(maxHeap)==0:
         print(minHeap[0])
+
+    elif len(minHeap)-len(maxHeap) == 1:
+        print(minHeap[0])
+
     else:
         print(maxHeap[0][1])
+
+    
