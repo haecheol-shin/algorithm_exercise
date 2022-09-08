@@ -19,4 +19,4 @@ def star(l):
     return stars
 
 n = int(sys.stdin.readline())
-print('\n'.join(star(n)))
+print('\n'.join(star(n))) # 리스트에 join을 하면 요소 하나당 그 문자를 붙여서 출력해준다.
