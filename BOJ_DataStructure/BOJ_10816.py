@@ -1,19 +1,21 @@
 import sys
 
+n = int(sys.stdin.readline().rstrip())
+intCard = list(map(int, sys.stdin.readline().rstrip().split()))
+m = int(sys.stdin.readline().rstrip())
+question = list(map(int, sys.stdin.readline().rstrip().split()))
+
 result = {}
-n = int(sys.stdin.readline())
-
-intCard = sys.stdin.readline().split() # type: str
-
-m = int(sys.stdin.readline())
-question = sys.stdin.readline().split() # type: str
-for num in question:
-    result[num] = 0
-
 for num in intCard:
-    try:
-        result[num] += 1
-    except KeyError:
-        pass
+    if num not in result:
+        result.setdefault(num, 1)
+    
+    else:
+        result.update({num:result.get(num)+1})
 
-print(' '.join(map(str, result.values())))
+for num in question:
+    if result.get(num) == None:
+        print(0, end=' ')
+    
+    else:
+        print(result.get(num), end=' ')
