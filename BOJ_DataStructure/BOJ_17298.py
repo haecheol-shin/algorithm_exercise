@@ -1,20 +1,19 @@
-import sys
+import sys;
 
-n = int(sys.stdin.readline()) # 수열의 크기
-intSequence = list(map(int, input().split()))
-result = []
-
-for i in range(n):
-    for j in range(i+1, n):
-        if (intSequence[i]<intSequence[j]):
-            result.append(intSequence[j])
-            break
-
-        if (j==n-1):
-            result.append(-1)
-            break
-
-result.append(-1)
-
-for i in result:
-    print(i, end=' ')
+n = int(sys.stdin.readline())
+nums = list(map(int, sys.stdin.readline().split()))
+dap = [-1] * n
+idx = []
+st = []
+for i in range(n - 1):
+    if nums[i] > nums[i + 1]:
+        st.append(nums[i])
+        idx.append(i)
+    else:
+        dap[i] = nums[i + 1]
+        if len(st) != 0 and st[-1] < nums[i + 1]:
+            while st and st[-1] < nums[i + 1]:
+                dap[idx[-1]] = nums[i + 1]
+                st.pop()
+                idx.pop()
+print(*dap)
