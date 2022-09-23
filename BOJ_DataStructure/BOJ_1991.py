@@ -1,36 +1,29 @@
 import sys
+from turtle import right
 
-class Node:
-
-    def __init__(self, item):
-        self.data = item
-        self.right = None
-        self.left = None
-
-    def size(self):
-        l = self.left.size() if self.left else 0
-        r = self.right.size() if self.right else 0
-        return l + r + 1
-
+class Node():
+    def __init__(self, key):
+        self.key = key
+        self.l = None
+        self.r = None
 
 class Tree:
 
     def __init__(self, root):
         self.root = root
 
-    def insert(self, node):
-        if self.nodeCount==0:
+    def insert(self, key, l, r):
+        node = Node(key)
+        if self.root == None:
             self.root = node
-        
-        else:
+        left = Node(l)
+        right = Node(r)
+        node.l = left
+        node.r = right
 
+n = int(sys.stdin.readline().rstrip())
 
-
-if __name__ == "__main__":
-    n = int(sys.stdin.readline().rstrip())
-
-    for i in range(n):
-        node = sys.stdin.readline().rstrip().split()
-        # node[0] -> data
-        # node[1] -> left
-        # node[2] -> right
+for i in range(n):
+    nodeInput = list(sys.stdin.readline().rstrip().split())
+    node = Node(nodeInput[0])
+    
