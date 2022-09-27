@@ -10,10 +10,8 @@ class Node():
         if self:
             sys.stdout.write(self.key)
             if self.l != None:
-                print('d')
                 self.l.preorder_travel()
             if self.r != None:
-                print('b')
                 self.r.preorder_travel()
 
 
@@ -22,14 +20,29 @@ class Tree:
     def __init__(self, root=None):
         self.root = root
 
+
     def insert(self, key, l, r):
-        node = Node(key)
         if self.root == None:
-            self.root = node
-        left = Node(l)
-        right = Node(r)
-        node.l = left
-        node.r = right
+            v = Node(key)
+            self.root = v
+        else:
+            v = self.find(key, self.root)
+        if v.l != None and l != None:
+            left = Node(l)
+            v.l = left
+        
+        if v.r != None and r != None:
+            right = Node(r)
+            v.r = right
+
+    def find(self, item, n):
+        if n.key == item:
+            print(n)
+            return n
+        if n.l != None:
+            self.find(item, n.l)
+        if n.r != None:
+            self.find(item, n.r)
 
 n = int(sys.stdin.readline().rstrip())
 tree = Tree()
