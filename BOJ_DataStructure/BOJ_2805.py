@@ -15,10 +15,10 @@ while(start <= end):
         if result >= m:
             break
 
-    if result == m:
-        break
+    if result < m:
+        end = mid - 1
 
-    elif result > m:
+    else:
         start = mid + 1
 
-print(mid)      
+print(end)      
