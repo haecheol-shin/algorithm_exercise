@@ -16,5 +16,14 @@ q = deque([1])
 visited[1] = 0
 
 while q:
-    # 방문하지 않은 곳 부터 순차적으로 방문하고
-    # 방문한 곳은 visited = 1로
+    x = q.popleft() 
+    for e in graph[x]:
+        if not visited[e]:
+            q.append(e)
+            visited[e] = visited[x] + 1
+
+for i in range(2, len(graph)):
+    graph[i].sort(key = lambda x : visited[x])
+    
+for i in range(2, len(graph)):
+    print(graph[i][0])
