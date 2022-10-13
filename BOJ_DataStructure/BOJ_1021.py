@@ -13,9 +13,14 @@ for i in position:
             dq.popleft()
             break
         else:
-            if 
+            if dq.index(i) < len(dq)/2:  
+                while dq[0] != i:
+                    dq.append(dq.popleft())  
+                    count += 1
             
             else:  
-                
+                while dq[0] != i:
+                    dq.appendleft(dq.pop())  
+                    count += 1
                 
 print(count)
